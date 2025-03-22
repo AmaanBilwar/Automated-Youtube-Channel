@@ -95,14 +95,17 @@ def main():
             unique_topics.append(topic)
     
     # Print results
-    print(f"\nFound {len(unique_topics)} unique trending topics:")
-    for i, topic in enumerate(unique_topics, 1):
-        print(f"\n{i}. {topic['title']}")
-        print(f"   {topic['snippet']}")
-        print(f"   Source: {topic.get('source', 'Unknown')}")
-        print(f"   Link: {topic['link']}")
-        if "date" in topic:
-            print(f"   Date: {topic['date']}")
+    with open("trending_topics.json", "w") as f:
+        json.dump(unique_topics, f, indent=4)
+
+    # print(f"\nFound {len(unique_topics)} unique trending topics:")
+    # for i, topic in enumerate(unique_topics, 1):
+    #     print(f"\n{i}. {topic['title']}")
+    #     print(f"   {topic['snippet']}")
+    #     print(f"   Source: {topic.get('source', 'Unknown')}")
+    #     print(f"   Link: {topic['link']}")
+    #     if "date" in topic:
+    #         print(f"   Date: {topic['date']}")
 
 if __name__ == "__main__":
     main()

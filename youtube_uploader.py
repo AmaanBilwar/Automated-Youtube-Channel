@@ -3,7 +3,7 @@ import google_auth_oauthlib.flow
 import googleapiclient.discovery
 import googleapiclient.errors
 from googleapiclient.http import MediaFileUpload
-from dotenv import load_dotenv
+
 
 def authenticate_youtube():
     """Authenticate with YouTube API using OAuth flow"""

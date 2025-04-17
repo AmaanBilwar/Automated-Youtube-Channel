@@ -1,3 +1,5 @@
+[https://chatgpt.com/c/6800a04a-7aac-8005-b80b-6d6450be6c3b](basic structure)
+
 # Todo
 
 ## Text-to-Speech (TTS)

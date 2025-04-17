@@ -2,15 +2,15 @@
 # Todo
 
 ## tech recaps
-- [ ] scrape hacker news
-- [ ] build script prompt
-- [ ] write script for voice over generation
+- [x] scrape hacker news
+- [x] build script prompt
+- [x] write script for voice over generation
 - [ ] script for visual generation
 - [ ] write folder structure
 ```bash 
 /output/youtube-tech-2025-04-18/
-├── script.txt
-├── voiceover.mp3
+├── script-tech.txt
+├── voiceover-tech.wav
 ├── visuals/
 │   ├── bg1.jpg
 │   └── overlay.png
@@ -22,14 +22,14 @@
 
 ## stoic ideas
 - [ ] pull data from gutenberg or something
-- [ ] build script prompt
-- [ ] write script for voice over generation
+- [x] build script prompt
+- [x] write script for voice over generation
 - [ ] script for visual generation
 - [ ] write folder structure
 ```bash 
 /output/youtube-stoic-2025-04-18/
-├── script.txt
-├── voiceover.mp3
+├── script-stoic.txt
+├── voiceover-stoic.wav
 ├── visuals/
 │   ├── bg1.jpg
 │   └── overlay.png

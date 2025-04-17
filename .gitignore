@@ -180,3 +180,9 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+
+output/
+
+hacker_news_stories.json
+

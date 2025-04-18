@@ -5,8 +5,7 @@
 - [x] scrape hacker news
 - [x] build script prompt
 - [x] write script for voice over generation
-- [ ] script for visual generation
-- [ ] write folder structure
+- [x] write folder structure
 ```bash 
 /output/youtube-tech-2025-04-18/
 ├── script-tech.txt
@@ -24,8 +23,7 @@
 - [ ] pull data from gutenberg or something
 - [x] build script prompt
 - [x] write script for voice over generation
-- [ ] script for visual generation
-- [ ] write folder structure
+- [x] write folder structure
 ```bash 
 /output/youtube-stoic-2025-04-18/
 ├── script-stoic.txt

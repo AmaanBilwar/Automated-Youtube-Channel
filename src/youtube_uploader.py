@@ -3,7 +3,7 @@ import google_auth_oauthlib.flow
 import googleapiclient.discovery
 import googleapiclient.errors
 from googleapiclient.http import MediaFileUpload
-
+from google import genai
 
 def authenticate_youtube():
     """Authenticate with YouTube API using OAuth flow"""
@@ -26,6 +26,17 @@ def authenticate_youtube():
         "youtube", "v3", credentials=credentials)
     
     return youtube
+
+def generate_title():
+    topic = f''
+    """Generate title for a video based on the title"""
+    response = genai.Client.generate_content(
+        model="gemini-2.0-flash",
+        prompt=f"Generate a title for a video about {topic}"
+    )
+    title = response.text
+    return title
+
 
 def upload_video(youtube, file_path, title, description, tags=None, category_id="22"):
     """Upload a video to YouTube as unlisted"""

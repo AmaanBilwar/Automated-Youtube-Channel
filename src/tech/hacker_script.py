@@ -1,55 +1,59 @@
-from google import genai
-import os 
-import re
 import json
-from datetime import datetime
+import os
+from google import genai
 from dotenv import load_dotenv
 load_dotenv()
 
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")    
 client = genai.Client(api_key=GEMINI_API_KEY)
 
-def load_hacker_news_stories():
+def load_tech_news():
     """
-    Load and parse the hacker news stories from JSON file
+    Load and parse the tech news from JSON file
     
     Returns:
-        list: List of hacker news stories
+        list: List of tech news items
     """
     try:
         with open('hacker_news_stories.json', 'r', encoding='utf-8') as f:
-            stories = json.load(f)
-        return stories
+            news_items = json.load(f)
+        return news_items[:5]  # Get only the first 5 news items
     except Exception as e:
-        print(f"Error loading hacker news stories: {e}")
+        print(f"Error loading tech news: {e}")
         return []
 
-def create_combined_script(stories):
+def create_tech_script(news_items):
     """
-    Create a combined script from multiple hacker news stories
+    Create a script from multiple tech news items
     
     Args:
-        stories (list): List of hacker news stories
+        news_items (list): List of tech news items
         
     Returns:
         str: Combined script text
     """
     # Prepare the content for the prompt
-    stories_content = "\n".join([
-        f"Title: {story['title']}\nPoints: {story['points']}\n"
-        for story in stories[:5]  # Use top 5 stories
-    ])
+    news_content = ""
+    for i, item in enumerate(news_items, 1):
+        news_content += f"\nNews {i}:\nTitle: {item['title']}\nURL: {item['link']}\nPoints: {item['points']}\n"
     
-    prompt = f"""Create a 30-second engaging script for a tech news roundup video using these top stories:
-{stories_content}
+    prompt = f"""Create a 60-second YouTube Shorts script that summarizes these 5 tech news stories in an engaging way.
+
+    {news_content}
 
 The script should:
-1. Be exactly 30 seconds when read aloud
-2. Focus on the most interesting aspects of each story
-3. Be engaging and suitable for YouTube Shorts
-4. Include a brief introduction and conclusion
-5. Only include the narrator's dialogue, no visual cues or music notes
-6. Be written in a conversational, engaging tone
+1. Be exactly 60 seconds when read aloud (approximately 150 words)
+2. Start with a hook in the first 3 seconds to grab attention
+3. Summarize each news item in 10-12 seconds
+4. Include why these news items matter to the viewer
+5. End with a thought-provoking conclusion
+6. Be engaging and suitable for YouTube Shorts
+7. Only include the narrator's dialogue, no visual cues or music notes
+8. Be written in a conversational, engaging tone
+9. Use short sentences and simple language
+10. Include a call to action at the end
+11. Flow smoothly between different news items
+12. Highlight the most interesting aspects of each story
 
 Format the response as a clean script with only the narrator's lines."""
 
@@ -60,41 +64,44 @@ Format the response as a clean script with only the narrator's lines."""
     
     return script_response.text
 
-def write_script(script_text):
+def write_tech_script(script_text, news_items):
     """
     Write the script to a file in the output directory
     
     Args:
         script_text (str): The script content to write
+        news_items (list): The news items used for the script
         
     Returns:
         str: Path to the written script file
     """
     # Create output directory if it doesn't exist
+    from datetime import datetime
     today = datetime.now().strftime("%Y-%m-%d")
     output_dir = f"output/youtube-tech-{today}"
     os.makedirs(output_dir, exist_ok=True)
     
     # Write script to file
     script_path = os.path.join(output_dir, "script-tech.txt")
-    with open(script_path, 'w') as f:
+    with open(script_path, 'w', encoding='utf-8') as f:
         f.write(script_text)
     
     print(f"Script written to: {script_path}")
     return script_path
 
+def main():
+    # Load news items
+    news_items = load_tech_news()
+    if not news_items:
+        print("No news items found")
+        return
+    
+    # Create combined script for all news items
+    script_text = create_tech_script(news_items)
+    
+    # Write the script to file
+    script_path = write_tech_script(script_text, news_items)
+    print(f"Combined script generated and saved to: {script_path}")
 
 if __name__ == "__main__":
-    print("\n--- LOADING HACKER NEWS STORIES ---\n")
-    stories = load_hacker_news_stories()
-    
-    if not stories:
-        print("No stories found. Exiting...")
-        exit(1)
-    
-    print("\n--- GENERATING COMBINED SCRIPT ---\n")
-    combined_script = create_combined_script(stories)
-    
-    print("\n--- WRITING SCRIPT TO FILE ---\n")
-    script_path = write_script(combined_script)
-    
+    main() 

@@ -11,7 +11,8 @@ load_dotenv()
 
 today = datetime.datetime.now().strftime("%Y-%m-%d")
 def generate_audio(script_text):
-    with open(f'output/youtube-stoic-{today}/script-stoic.txt', 'r') as f:
+    # Use UTF-8 encoding when reading the file to handle special characters
+    with open(f'output/youtube-stoic-{today}/script-stoic.txt', 'r', encoding='utf-8') as f:
         script_text = f.read()
 
     pipeline = KPipeline(lang_code='a')

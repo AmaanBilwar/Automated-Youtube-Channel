@@ -11,7 +11,7 @@ load_dotenv()
 
 today = datetime.datetime.now().strftime("%Y-%m-%d")
 def generate_audio(script_text):
-    with open(f'output/youtube-tech-{today}/script.txt', 'r') as f:
+    with open(f'output/youtube-tech-{today}/script-tech.txt', 'r') as f:
         script_text = f.read()
 
     pipeline = KPipeline(lang_code='a')

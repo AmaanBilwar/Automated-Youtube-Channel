@@ -27,6 +27,8 @@ if (Test-Path ".venv") {
 # Run scripts in sequence
 Remove-Item -Path "output" -Recurse
 Remove-Item -Path "data" -Recurse
+Remove-Item -Path "hacker_news_stories.json" -Recurse
+
 
 
 
